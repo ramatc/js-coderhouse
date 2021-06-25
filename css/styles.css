@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    background-color: #ffffff;
+}
+html,body {
+    height: 100vh;
+}
+body{
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+}
+li, a, button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+    text-decoration: none;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+.margin-top{
+    margin-top: 110px;
+}
+.nav-title{
+    font-family: "Montserrat", sans-serif;
+    color: #000000;
+    cursor: pointer;
+}
+.nav-links{
+    list-style: none;
+}
+.nav-links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+.nav-links li a{
+    transition: all 0.3s ease 0s;
+}
+.nav-links li a:hover{
+    color: #0088a9
+}
+button{
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+button:hover{
+    background-color: rgba(0,136,169,0.8);
+}
+.banner{
+    width: 100%;
+}
+main{
+    width: 80%;
+    margin: 0 auto;
+}
+.main-products{
+    margin-top:50px
+}
+.main-article{
+    display: flex;
+    justify-content: space-around;
+    margin-top:50px;
+}
+.title-product{
+    color: black;
+    padding: 10px 0px;
+}
+.description-product{
+    color: black;
+    padding: 10px 0px;
+}
+.copyrightText {
+    width: 100%;
+    padding: 8px 100px;
+    text-align: center;
+    color: #999;
+    margin-top: 70px;
+}
+article img{
+    max-width: 450px;
+}
+/* .search-button {
+    background: #ffffff;
+    border: 2px solid var(--clr-primary);
+    border-radius: 99em;
+    min-width: 200px;
+    max-width: 400px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 0px 0.7em;
+}
+.search-button input {
+    background: transparent;
+    border: none;
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    padding: 0.7em 1em;
+    width: 90%;
+} */
