@@ -1,7 +1,7 @@
-# CODERHOUSE PROYECTO
+# VinylWRLD
 
 ## 🤔 ¿Qué es?
-(NOMBRE) es un e-commerce ficticio creado como proyecto para <a href="https://www.coderhouse.com/">Coder House</a>. La idea es aplicar la mayor cantidad de funcionalidades que posea JavaScript, para poder crear soluciones web interactivas.
+VinylWRLD es un e-commerce ficticio creado como proyecto para <a href="https://www.coderhouse.com/">Coder House</a>. La idea es aplicar la mayor cantidad de funcionalidades que posea JavaScript, para poder crear soluciones web interactivas.
 
 ## 🧱 ¿Cuál es el stack de tecnologías usado? 
 Las tecnologías usadas para realizar el proyecto son:

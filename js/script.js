@@ -1,12 +1,8 @@
 window.addEventListener("load", function() {
- //  FUNCIONES DE LA CLASE 4     
     function saludar() {
         let nombreIngresado = prompt("Ingresé su nombre")
         alert("Bienvenido a nuestro sitio " + nombreIngresado)
     }
-
-    saludar();
-
     function compraFinalizada() {
         alert("Gracias por su compra!!!")
     }
@@ -35,6 +31,8 @@ window.addEventListener("load", function() {
         }
     }
 
+    saludar();
+
     realizarCompra = confirm("¿Desea realizar una compra?");
 
     let precioTotal = 0;
@@ -51,8 +49,7 @@ window.addEventListener("load", function() {
     } else {
         
     }
-
-//  OBJETOS CLASE 5
+    
     class Producto {
         constructor(nombre, descripcion, precio) {
             this.nombre = nombre;
@@ -106,6 +103,7 @@ window.addEventListener("load", function() {
                 for (const producto of productos) {
                     producto.mostrarProducto();
                 }
+                
                 totalProductos(productos);
                 console.log("-------------------------------");
 
@@ -139,7 +137,6 @@ window.addEventListener("load", function() {
         alert("¡Gracias por visitarnos, saludos!")
     }
 
-//  ARRAYS CLASE 6
     console.log(usuarios);
     console.log(productos);
 
