@@ -43,7 +43,8 @@ header{
     font-weight: lighter;
     transition: all 0.3s ease 0s;
 }
-.nav-title:hover, .nav-links li a:hover{
+.nav-title:hover,
+.nav-links li a:hover{
     color: rgba(101,32,139,1);
 }
 .nav-links{

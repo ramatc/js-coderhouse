@@ -49,7 +49,8 @@ window.addEventListener("load", function() {
     } else {
         
     }
-    
+
+    //Clase constructora para crear el objeto Producto
     class Producto {
         constructor(nombre, descripcion, precio) {
             this.nombre = nombre;
@@ -64,7 +65,8 @@ window.addEventListener("load", function() {
             console.log("El producto creado se llama " + this.nombre + ", y tiene un precio de $" + this.precio);
         }
     }
-    
+
+    //Clase constructora para crear el objeto Usuario
     class Usuario {
         constructor(nombre, apellido, edad) {
             this.nombre = nombre;
@@ -80,9 +82,11 @@ window.addEventListener("load", function() {
         }
     }
 
+    //Declaracion de arrays vacios para ser utilizados luego
     const productos = [];
     const usuarios = [];
 
+    //Si la condicion es true, se procedera a crear un usuario o un producto, lo que elija el cliente
     let condicion = confirm("¿Quieres crear un usuario o un producto?");
     if(condicion == true){
         do {
@@ -132,18 +136,23 @@ window.addEventListener("load", function() {
     
             condicion = confirm("¿Queres seguir agregando productos o usuarios?")
     
-        } while (condicion != false)
+        } while (condicion != false) //Mientras la condicion sea distitna de falso, se va a volver a ejuctar la operación 
     }else{
         alert("¡Gracias por visitarnos, saludos!")
     }
 
+    //Total de usuarios y de productos mostrados por consola
+    console.log("Listado con todos los usuarios creados");
     console.log(usuarios);
+    console.log("Listado con todos los productos creados");
     console.log(productos);
 
+    //Filtracion de los productos mas baratos, mostrado por consola
     const productosBaratos = productos.filter(producto => producto.precio < 1000);
     console.log("Los productos mas baratos son:");
     console.log(productosBaratos);
 
+    //El precio de cada producto con su IVA correspondiente, mostrado por consola
     const productosIva = productos.map(producto => producto.precio * 1.21);
     console.log("El precio de los productos con IVA es de:");
     console.log(productosIva);
