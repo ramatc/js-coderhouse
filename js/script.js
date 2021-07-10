@@ -2,9 +2,6 @@ window.addEventListener("load", function() {
     //Llamado a las sections principales del body, para insertarles los productos
     let mainSection = document.getElementsByClassName("main-article");
    
-    //Declaracion de array vacio para agregar los productos que se sumen al carrito
-    let carrito = [];
-
     //Funcion para setear items en el local storage
     function setLocal(key, value){
         localStorage.setItem(key, value);
@@ -65,18 +62,36 @@ window.addEventListener("load", function() {
         })
     }
 
+    // localStorage.clear()
+
+    //Declaracion de array vacio para agregar los productos que se sumen al carrito
+    let carrito = [];
+
+    //Parsea el carrito que esta en localStorage, y chequea si hay algo dentro del carrito para mantenerlo
+    let cartAmount = 0
+    
+    let carritoParseado = JSON.parse(localStorage.getItem("Carrito"));
+    if(carritoParseado){
+        carrito = carritoParseado
+        cartAmount = carritoParseado.length
+    }
+   
+    let cartNumber = document.querySelector(".cartNumber")
+    function countCart(){
+        cartAmount = carrito.length
+        cartNumber.innerText = cartAmount
+    }
+    countCart();
+
+    //Funcion para agregar items al carrito, donde los filtra por id, y los pushea al array "carrito"
     function addCart(id){
         let items = products.filter(product => product.id == id);
         let item = items[0];
         carrito.push({id: item.id, img: item.img, name: item.name, description: item.description, price: item.price});
         setLocal("Carrito", JSON.stringify(carrito));
+        countCart();
     }
 
-    let carritoParseado = JSON.parse(localStorage.getItem("Carrito"));
-    if(carritoParseado){
-        carrito = carritoParseado
-    }
-   
     //Llamado al formulario y todos sus elementos para validarlo
     let form = document.getElementById("form");
     let name = document.getElementById("name");

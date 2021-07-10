@@ -228,6 +228,16 @@ footer{
    width: 245px;
    border-radius: 5px;
 }
+.cartNumber{
+    /* font-size: 0.8em;
+    background: var(--clr-primary);
+    line-height: 1;
+    padding: 0.3em 0.5em;
+    border-radius: 99em;
+    position: absolute;
+    top: -5px;
+    right: -5px; */
+}
 
 /* .search-button {
     background: #ffffff;
