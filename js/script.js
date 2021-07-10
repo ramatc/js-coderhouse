@@ -3,7 +3,7 @@ window.addEventListener("load", function() {
     let mainSection = document.getElementsByClassName("main-article");
    
     //Declaracion de array vacio para agregar los productos que se sumen al carrito
-    const carrito = [];
+    let carrito = [];
 
     //Funcion para setear items en el local storage
     function setLocal(key, value){
@@ -46,6 +46,22 @@ window.addEventListener("load", function() {
     for (let i = 0; i < boton.length; i++) {
         boton[i].addEventListener("click",function() {
            addCart(boton[i].id);
+           Toastify({
+               text: "El producto fue agregado a tu carrito.",
+               duration: 2500,
+               destination: "",
+               newWindow: true,
+               close: true,
+               gravity: "top", 
+               position: "right",
+               className: "alertBuy",
+               stopOnFocus: true,
+               offset: {
+                x: 0, 
+                y: 90 
+              },
+               onClick: function(){} 
+             }).showToast();
         })
     }
 
@@ -57,9 +73,10 @@ window.addEventListener("load", function() {
     }
 
     let carritoParseado = JSON.parse(localStorage.getItem("Carrito"));
-    console.log(carritoParseado);
+    if(carritoParseado){
+        carrito = carritoParseado
+    }
    
-
     //Llamado al formulario y todos sus elementos para validarlo
     let form = document.getElementById("form");
     let name = document.getElementById("name");
@@ -177,11 +194,17 @@ window.addEventListener("load", function() {
             erMsg.innerText = (errores.msg) ? errores.msg : ' ';
            
         } else {
-            form.submit();
-            alert("Mensaje enviado con exito");
-        }
+            setTimeout(function(){ form.submit(); }, 2500);
+            Swal.fire({
+                icon: 'success',
+                title: '¡Su mensaje se ha enviado exitosamente!',
+                text: 'Lo contactaremos a la brevedad',
+                showConfirmButton: false,
+                timer: 2500
+              })
+            }
+        })
     })
-})
 
     //Capturo el boton que nos lleva arriba de todo.
     buttonTop = document.getElementById("btnTop");
