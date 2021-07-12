@@ -25,14 +25,28 @@
             <ul class="nav-links">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#products">Productos</a></li>
-                <li><a href="#">Nosotros</a></li>
+                <li><a href="#about">Nosotros</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
         </nav>
-            <button class="header-button">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cartNumber">0</span>
-            </button>
+        <button class="header-button" id="openMenu">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cartNumber">0</span>
+        </button>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" id="closeMenu">&times;</a>
+            <p class="titleCart">Tu carrito de compras:</p>
+            <section id="itemCart"></section>
+            <hr class="hr">
+            <div class="divPrice">
+                <p class="totalPrice">Total:</p>
+                <p class="totalPrice">$0.00</p>
+            </div>
+            <div class="buttonsCart">
+                <button class="btnBuy">Finalizar compra</button>
+                <button class="btnBuy">Vaciar carrito</button>
+            </div>
+        </div>
     </header>
     <main>
         <div class="margin-top"></div>
@@ -46,7 +60,6 @@
             </section>
 
         </div>
-
         <div class="section-contact" id="contact">
             <form action="" id="form">
                 <h1>Contactanos</h1>
@@ -74,7 +87,6 @@
                 </div>
             </form>
         </div>
-
     </main>
 
     <footer>
@@ -84,10 +96,11 @@
     </footer>
 
     <button id="btnTop" title="Go to top"><i class="fas fa-chevron-up"></i></button>
-
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="js/script.js"></script>
+    <script src="js/interacciones.js"></script>
+    <script src="js/validations.js"></script>
 </body>
 
 </html>
