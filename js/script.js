@@ -151,6 +151,8 @@ window.addEventListener("load", function() {
         addButton(item);
         subtractButton(item);
 
+        calculatePrice();
+
     }
 
     //Capturo los botones para eliminar un item del carrito
@@ -191,8 +193,6 @@ window.addEventListener("load", function() {
         let countPrice = document.getElementsByClassName("totalPrice");
         countPrice[1].innerText = `$${carrito[0].price}`;
     }
-
-    calculatePrice();
 
     //Capturo los botones para finalizar la compra y vaciar el carrito
     let buttonBuy = document.getElementById("btnBuy");
