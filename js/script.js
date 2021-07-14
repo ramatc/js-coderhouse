@@ -14,14 +14,14 @@ window.addEventListener("load", function() {
 
     //Declaracion de array con el listado de productos 
     const products = [
-        { id: 1, img: "astroworld.jpg", name: "Travis Scott", description: "ASTROWORLD Vinyl Record", price: 2500, class: "vinyl", amount: 1 },
-        { id: 2, img: "igor.jpg", name: "Tyler, The Creator", description: "THE IGOR LP Vinyl Record", price: 1300, class: "vinyl", amount: 1 },
-        { id: 3, img: "take-care.jpg", name: "Drake", description: "TAKE CARE Vinyl Record", price: 1100, class: "vinyl", amount: 1 },
-        { id: 4, img: "slim-shady.jpg", name: "Eminem", description: "SLIM SHADY LP Vinyl Record", price: 1700, class: "vinyl", amount: 1 },
-        { id: 5, img: "xxxtentacion.jpg", name: "XXXTentacion", description: "BAD VIBES FOREVER CD", price: 850, class: "cd", amount: 1 },
-        { id: 6, img: "juice.jpg", name: "Juice WRLD", description: "DEATH RACE FOR LOVE CD", price: 500, class: "cd", amount: 1 },
-        { id: 7, img: "kendrick.jpg", name: "Kendrick Lamar", description: "GOOD KID M.A.A.D CITY CD", price: 650, class: "cd", amount: 1 },
-        { id: 8, img: "postmalone.jpg", name: "Post Malone", description: "HOLLYWOOD BLEEDING CD", price: 450, class: "cd", amount: 1 }
+        { id: 1, img: "astroworld.jpg", name: "Travis Scott", description: "ASTROWORLD Vinyl Record", price: 2500, class: "vinyl"},
+        { id: 2, img: "igor.jpg", name: "Tyler, The Creator", description: "THE IGOR LP Vinyl Record", price: 1300, class: "vinyl"},
+        { id: 3, img: "take-care.jpg", name: "Drake", description: "TAKE CARE Vinyl Record", price: 1100, class: "vinyl"},
+        { id: 4, img: "slim-shady.jpg", name: "Eminem", description: "SLIM SHADY LP Vinyl Record", price: 1700, class: "vinyl"},
+        { id: 5, img: "xxxtentacion.jpg", name: "XXXTentacion", description: "BAD VIBES FOREVER CD", price: 850, class: "cd"},
+        { id: 6, img: "juice.jpg", name: "Juice WRLD", description: "DEATH RACE FOR LOVE CD", price: 500, class: "cd"},
+        { id: 7, img: "kendrick.jpg", name: "Kendrick Lamar", description: "GOOD KID M.A.A.D CITY CD", price: 650, class: "cd"},
+        { id: 8, img: "postmalone.jpg", name: "Post Malone", description: "HOLLYWOOD BLEEDING CD", price: 450, class: "cd"}
     ];
 
     //A traves del metodo for...of, añadimos todos los productos del array mediante plantillas
@@ -102,6 +102,7 @@ window.addEventListener("load", function() {
         }else{
             let items = products.filter(product => product.id == id);
             let item = items[0];
+            Object.defineProperty(item, 'amount', { value: 1, writable: true });
             carrito.push({ id: item.id, img: item.img, name: item.name, description: item.description, price: item.price, amount: item.amount });
             setLocal("Carrito", JSON.stringify(carrito));
        
@@ -126,8 +127,6 @@ window.addEventListener("load", function() {
 
             renderCart(item);
 
-            addButton();
-
         }
     }
 
@@ -140,7 +139,7 @@ window.addEventListener("load", function() {
                                 <p>$${item.price}</p>
                                 <div>
                                     <button class="subtractButton" id=subtractButton${item.id}>-</button>
-                                    <span class="itemAmount">${item.amount}</span>
+                                    <span id=itemAmount${item.id}>${item.amount}</span>
                                     <span>Unidad(es)</span>
                                     <button class="addButton" id=addButton${item.id}>+</button>
                                 </div>
@@ -149,6 +148,10 @@ window.addEventListener("load", function() {
         contenedor.setAttribute("class", "articleCart");
         contenedor.innerHTML = listCards;
         cartItem.appendChild(contenedor);
+
+        addButton(item);
+        subtractButton(item);
+
     }
 
     //Capturo los botones para eliminar un item del carrito
@@ -159,41 +162,32 @@ window.addEventListener("load", function() {
         })
     }
 
-    //Capturo los botones para sumar o restar productos en el carrito
-    let contadorCarrito = document.querySelector(".itemAmount")
-
-    function addButton(){
-        let addButton = document.getElementsByClassName("addButton");
-        for (let i = 0; i < addButton.length; i++) {
-            addButton[i].addEventListener("click", function() {
-                let items = products.filter(product => product.id == (addButton[i].id).substr(9));
-                let item = items[0];
-                let numeroCarrito = item.amount += 1;
-                contadorCarrito.innerText = numeroCarrito
-                console.log(contadorCarrito);
-
-            })
-        }
+    //Funcion para sumar un producto en el carrito
+    function addButton(item){
+        let contadorCarrito = document.getElementById(`itemAmount${item.id}`);
+        let btnAdd =  document.getElementById(`addButton${item.id}`);
+        btnAdd.addEventListener("click", function(){
+            let objectCart = carrito.find(({ id }) => id == item.id);
+            objectCart.amount++;
+            contadorCarrito.innerText = objectCart.amount;
+        })
     }
 
-    addButton();
-
-    function subtractButton(){
-        let subtractButton = document.getElementsByClassName("subtractButton");
-        for (let i = 0; i < subtractButton.length; i++) {
-            subtractButton[i].addEventListener("click", function() {
-                let items = products.filter(product => product.id == (subtractButton[i].id).substr(14));
-                let item = items[0];
-                let numeroCarrito = item.amount -= 1;
-                contadorCarrito.innerText = numeroCarrito
-                console.log(contadorCarrito);
-
-            })
-        }
+    //Funcion para restar un producto en el carrito
+    function subtractButton(item){
+        let contadorCarrito = document.getElementById(`itemAmount${item.id}`);
+        let btnSubtract =  document.getElementById(`subtractButton${item.id}`);
+        btnSubtract.addEventListener("click", function(){
+            let objectCart = carrito.find(({ id }) => id == item.id);
+            if (objectCart.amount == 1) {
+                objectCart.amount;
+            }else{
+                objectCart.amount--;
+            }
+            contadorCarrito.innerText = objectCart.amount;
+        })
     }
-
-    subtractButton();
-
+    
     //Capturo los botones para finalizar la compra y vaciar el carrito
     let buttonBuy = document.getElementById("btnBuy");
     let buttonEmpty = document.getElementById("btnEmpty");
@@ -223,4 +217,4 @@ window.addEventListener("load", function() {
         location.reload();
         countCart();
     })
-})
+})  
