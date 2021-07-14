@@ -3,9 +3,9 @@ window.addEventListener("load", function() {
     let openMenu = document.getElementById("openMenu")
     let closeMenu =  document.getElementById("closeMenu")
 
-    //Al abrir el menu, su width pasa a 400px, y el fondo del main se blurea
+    //Al abrir el menu, su width pasa a 550px, y el fondo del main se blurea
     openMenu.addEventListener("click", function(){
-        document.getElementById("mySidenav").style.width = "400px";
+        document.getElementById("mySidenav").style.width = "550px";
         document.querySelector("main").style.filter ="blur(3px)";
     })
     

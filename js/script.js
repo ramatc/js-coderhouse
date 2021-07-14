@@ -2,6 +2,11 @@ window.addEventListener("load", function() {
     //Llamado a las sections principales del body, para insertarles los productos
     let mainSection = document.getElementsByClassName("main-article");
 
+    //Llamado al carrito, donde se van a insertar los productos comprados
+    let cartItem = document.getElementById("itemCart");
+
+    let totalPrice = 0;
+
     //Funcion para setear items en el local storage
     function setLocal(key, value) {
         localStorage.setItem(key, value);
@@ -19,6 +24,7 @@ window.addEventListener("load", function() {
         { id: 8, img: "postmalone.jpg", name: "Post Malone", description: "HOLLYWOOD BLEEDING CD", price: 450, class: "cd", amount: 1 }
     ];
 
+    //A traves del metodo for...of, añadimos todos los productos del array mediante plantillas
     for (const product of products) {
         const listCards = `<img src="img/${product.img}" alt="${product.description}">
                            <h3 class="title-product">${product.name}</h3>
@@ -37,12 +43,68 @@ window.addEventListener("load", function() {
         }
     }
 
+    //Declaracion de array vacio para agregar los productos que se sumen al carrito
+    let carrito = [];
+
+    //Declaracion de variable para inicializar la cantidad de productos en el carrito, y luego sumarle los productos agregados
+    let cartAmount = 0
+
+    //Parsea el carrito que esta en localStorage, y chequea si hay algo dentro del carrito para mantenerlo
+    let carritoParseado = JSON.parse(localStorage.getItem("Carrito"));
+    if (carritoParseado) {
+        carrito = carritoParseado;
+        cartAmount = carritoParseado.length;
+
+        for (const item of carritoParseado) {
+            renderCart(item);
+        }
+        
+    }
+
+    //Actualiza la cantidad de productos en el carrito, a traves de la propiedad carrito.length 
+    let cartNumber = document.querySelector(".cartNumber")
+    function countCart() {
+        cartAmount = carrito.length
+        cartNumber.innerText = cartAmount
+    }
+
+    countCart();
+
     //Capturo los botones de "agregar al carrito" de cada producto.
     let boton = document.getElementsByClassName("cart-button");
     for (let i = 0; i < boton.length; i++) {
         boton[i].addEventListener("click", function() {
             addCart(boton[i].id);
-            location.reload();
+        })
+    }
+    
+    //Funcion para agregar items al carrito, donde los filtra por id, y los pushea al array "carrito"
+    function addCart(id) {
+        const validar = carrito.find(producto => producto.id  == id);
+        if(validar){
+            Toastify({
+                text: "El producto ya esta en tu carrito.",
+                duration: 2500,
+                destination: "",
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                className: "alertCart",
+                stopOnFocus: true,
+                offset: {
+                    x: 0,
+                    y: 90
+                },
+                onClick: function() {}
+            }).showToast();
+
+        }else{
+            let items = products.filter(product => product.id == id);
+            let item = items[0];
+            carrito.push({ id: item.id, img: item.img, name: item.name, description: item.description, price: item.price, amount: item.amount });
+            setLocal("Carrito", JSON.stringify(carrito));
+       
             Toastify({
                 text: "El producto fue agregado a tu carrito.",
                 duration: 2500,
@@ -59,64 +121,106 @@ window.addEventListener("load", function() {
                 },
                 onClick: function() {}
             }).showToast();
+
+            countCart();
+
+            renderCart(item);
+
+            addButton();
+
+        }
+    }
+
+    //Funcion para renderizar en el carrito todos los objetos que se hayan pusheado anteriormente dentro del array carrito
+    function renderCart(item){
+        const listCards = `<img src="img/${item.img}" alt="${item.description}">
+                           <div class="textCart">
+                                <p>${item.name}</p>
+                                <p>${item.description}</p>
+                                <p>$${item.price}</p>
+                                <div>
+                                    <button class="subtractButton" id=subtractButton${item.id}>-</button>
+                                    <span class="itemAmount">${item.amount}</span>
+                                    <span>Unidad(es)</span>
+                                    <button class="addButton" id=addButton${item.id}>+</button>
+                                </div>
+                            </div>`;
+        let contenedor = document.createElement("div");
+        contenedor.setAttribute("class", "articleCart");
+        contenedor.innerHTML = listCards;
+        cartItem.appendChild(contenedor);
+    }
+
+    //Capturo los botones para eliminar un item del carrito
+    let buttonDelete = document.getElementsByClassName("btnDelete")
+    for (let i = 0; i < buttonDelete.length; i++){
+        buttonDelete[i].addEventListener("click", function(){
+            deleteItem(buttonDelete[i].id);
         })
     }
 
-    //Declaracion de array vacio para agregar los productos que se sumen al carrito
-    let carrito = [];
+    //Capturo los botones para sumar o restar productos en el carrito
+    let contadorCarrito = document.querySelector(".itemAmount")
 
-    //Declaracion de variable para inicializar la cantidad de productos en el carrito, y luego sumarle los productos agregados
-    let cartAmount = 0
+    function addButton(){
+        let addButton = document.getElementsByClassName("addButton");
+        for (let i = 0; i < addButton.length; i++) {
+            addButton[i].addEventListener("click", function() {
+                let items = products.filter(product => product.id == (addButton[i].id).substr(9));
+                let item = items[0];
+                let numeroCarrito = item.amount += 1;
+                contadorCarrito.innerText = numeroCarrito
+                console.log(contadorCarrito);
 
-    //Parsea el carrito que esta en localStorage, y chequea si hay algo dentro del carrito para mantenerlo
-    let carritoParseado = JSON.parse(localStorage.getItem("Carrito"));
-    if (carritoParseado) {
-        carrito = carritoParseado
-        cartAmount = carritoParseado.length
+            })
+        }
     }
 
-    //Actualiza la cantidad de productos en el carrito, a traves de la propiedad carrito.length 
-    let cartNumber = document.querySelector(".cartNumber")
+    addButton();
 
-    function countCart() {
-        cartAmount = carrito.length
-        cartNumber.innerText = cartAmount
+    function subtractButton(){
+        let subtractButton = document.getElementsByClassName("subtractButton");
+        for (let i = 0; i < subtractButton.length; i++) {
+            subtractButton[i].addEventListener("click", function() {
+                let items = products.filter(product => product.id == (subtractButton[i].id).substr(14));
+                let item = items[0];
+                let numeroCarrito = item.amount -= 1;
+                contadorCarrito.innerText = numeroCarrito
+                console.log(contadorCarrito);
+
+            })
+        }
     }
 
-    if (cartAmount == 0) {
-        cartNumber.innerText = "0"
-    } else {
+    subtractButton();
+
+    //Capturo los botones para finalizar la compra y vaciar el carrito
+    let buttonBuy = document.getElementById("btnBuy");
+    let buttonEmpty = document.getElementById("btnEmpty");
+
+    /*Al hacer click en el boton, va a mandar una alerta si el carrito esta vacio, 
+    y de no ser asi, va a mandar otra alerta que notifique la compra, vaciando ademas el localStorage*/
+    buttonBuy.addEventListener("click", function(e){
+        if(carrito == 0){
+            e.preventDefault();
+            Swal.fire('Su carrito esta vacio')
+        }else{
+            Swal.fire({ 
+                icon: 'success',
+                title: '¡Su compra ha sido exitosa!',
+                showConfirmButton: false,
+                timer: 2000 
+            })
+            setTimeout(function() { location.reload(); }, 2000);
+            localStorage.clear();
+            countCart();
+        }
+    })
+
+    //Al hacer click en el boton, vacia el localStorage, y recarga la página
+    buttonEmpty.addEventListener("click", function(){
+        localStorage.clear();
+        location.reload();
         countCart();
-    }
-
-    //Funcion para agregar items al carrito, donde los filtra por id, y los pushea al array "carrito"
-    function addCart(id) {
-        let items = products.filter(product => product.id == id);
-        let item = items[0];
-        carrito.push({ id: item.id, img: item.img, name: item.name, description: item.description, price: item.price, amount: item.amount });
-        setLocal("Carrito", JSON.stringify(carrito));
-        countCart();
-    }
-    
-    let cartItem = document.getElementById("itemCart")
-    for (const itemCart of carrito) {
-        const listCards = `<img src="img/${itemCart.img}" alt="${itemCart.description}">
-                           <div class="textCart">
-                                <p>${itemCart.name}</p>
-                                <p>${itemCart.description}</p>
-                                <p>$${itemCart.price}</p>
-                                <div>
-                                    <button class="quantityButton">-</button>
-                                    <span>${itemCart.amount}</span>
-                                    <span>Unidad(es)</span>
-                                    <button class="quantityButton">+</button>
-                                </div>
-                           </div>`;
-            let contenedor = document.createElement("div");
-            contenedor.setAttribute("class", "articleCart");
-            contenedor.innerHTML = listCards;
-            cartItem.appendChild(contenedor);
-    }
+    })
 })
-
-//    localStorage.clear()

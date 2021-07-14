@@ -229,6 +229,12 @@ footer{
    width: 245px;
    border-radius: 5px;
 }
+.alertCart{
+    background: linear-gradient(to right, #73a5ff, #5477f5);
+    white-space: initial;
+    width: 245px;
+    border-radius: 5px;
+}
 .cartNumber{
     font-size: 14px;
     background: #000000;
@@ -296,7 +302,8 @@ footer{
     justify-content: space-evenly;
     padding-left: 8px;
 }
-.quantityButton{
+.addButton,
+.subtractButton{
     background-color: rgba(101,32,139,1);
     border-radius: 100%;
     border: none;
@@ -326,7 +333,7 @@ footer{
     justify-content: space-evenly;
     margin: 0px 0.2em;
 }
-.btnBuy{
+.btnCart{
     background-color: rgba(101,32,139,1);
     font-weight: 900;
     border: 2px solid;
@@ -338,10 +345,14 @@ footer{
     margin-bottom: 40px;
     transition: 0.5s;
 }
-.btnBuy:hover{
+.btnCart:hover{
     background-color: rgba(89, 29, 121, 0.8);
 }
-
+.btnDelete{
+    border: none;
+    background-color: #000000;
+    cursor: pointer;   
+}
 /* .search-button {
     background: #ffffff;
     border: 2px solid var(--clr-primary);
