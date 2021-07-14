@@ -54,11 +54,10 @@ window.addEventListener("load", function() {
     if (carritoParseado) {
         carrito = carritoParseado;
         cartAmount = carritoParseado.length;
-
+        
         for (const item of carritoParseado) {
             renderCart(item);
         }
-        
     }
 
     //Actualiza la cantidad de productos en el carrito, a traves de la propiedad carrito.length 
@@ -187,7 +186,14 @@ window.addEventListener("load", function() {
             contadorCarrito.innerText = objectCart.amount;
         })
     }
-    
+
+    function calculatePrice(){
+        let countPrice = document.getElementsByClassName("totalPrice");
+        countPrice[1].innerText = `$${carrito[0].price}`;
+    }
+
+    calculatePrice();
+
     //Capturo los botones para finalizar la compra y vaciar el carrito
     let buttonBuy = document.getElementById("btnBuy");
     let buttonEmpty = document.getElementById("btnEmpty");
