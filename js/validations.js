@@ -1,4 +1,4 @@
-window.addEventListener("load", function() {
+$(document).ready(function(){
     //Llamado al formulario y todos sus elementos para validarlo
     let form = document.getElementById("form");
     let name = document.getElementById("name");
@@ -126,4 +126,4 @@ window.addEventListener("load", function() {
             })
         }
     })
-})
+});

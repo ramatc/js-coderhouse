@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-
 }
 html,body {
     height: 100vh;
@@ -83,7 +82,8 @@ main{
 .main-products{
     margin-top:50px
 }
-.main-article{
+.main-article-top,
+.main-article-bottom{
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
