@@ -91,7 +91,7 @@ $(document).ready(function() {
             let items = products.filter(product => product.id == id);
             let item = items[0];
             Object.defineProperty(item, 'amount', { value: 1, writable: true });
-            carrito.push({ id: item.id, img: item.img, name: item.name, description: item.description, price: item.price, amount: item.amount });
+            carrito.push( { ...item, amount: 1});
             setLocal("Carrito", JSON.stringify(carrito));
 
             Toastify({
@@ -158,6 +158,7 @@ $(document).ready(function() {
             let objectCart = carrito.find(({ id }) => id == item.id);
             objectCart.amount++;
             $(`#itemAmount${item.id}`).text(objectCart.amount);
+            calculatePrice()
         })
     }
 
@@ -167,18 +168,19 @@ $(document).ready(function() {
             let objectCart = carrito.find(({ id }) => id == item.id);
             if (objectCart.amount == 1) {
                 objectCart.amount;
+                calculatePrice()
             } else {
                 objectCart.amount--;
+                calculatePrice()
             }
             $(`#itemAmount${item.id}`).text(objectCart.amount);
         })
     }
 
-    let totalPrice = 0;
-
     function calculatePrice() {
         let countPrice = $(".totalPrice");
-        countPrice[1].innerText = `$${carrito[0].price}`;
+        let total = carrito.reduce( (acc, prod) => acc + (prod.price * prod.amount), 0)
+        countPrice[1].innerText = `$${total}`;
     }
 
     /*Al hacer click en el boton, va a mandar una alerta si el carrito esta vacio, 

@@ -1,0 +1,68 @@
+{
+    "products": [{
+            "id": 1,
+            "img": "astroworld.jpg",
+            "name": "Travis Scott",
+            "description": "ASTROWORLD Vinyl Record",
+            "price": 2500,
+            "class": "vinyl"
+        },
+        {
+            "id": 2,
+            "img": "igor.jpg",
+            "name": "Tyler, The Creator",
+            "description": "THE IGOR LP Vinyl Record",
+            "price": 1300,
+            "class": "vinyl"
+        },
+        {
+            "id": 3,
+            "img": "take-care.jpg",
+            "name": "Drake",
+            "description": "TAKE CARE Vinyl Record",
+            "price": 1100,
+            "class": "vinyl"
+        },
+        {
+            "id": 4,
+            "img": "slim-shady.jpg",
+            "name": "Eminem",
+            "description": "SLIM SHADY LP Vinyl Record",
+            "price": 1700,
+            "class": "vinyl"
+        },
+        {
+            "id": 5,
+            "img": "xxxtentacion.jpg",
+            "name": "XXXTentacion",
+            "description": "BAD VIBES FOREVER CD",
+            "price": 850,
+            "class": "cd"
+        },
+        {
+            "id": 6,
+            "img": "juice.jpg",
+            "name": "Juice WRLD",
+            "description": "DEATH RACE FOR LOVE CD",
+            "price": 500,
+            "class": "cd"
+        },
+        {
+            "id": 7,
+            "img": "kendrick.jpg",
+            "name": "Kendrick Lamar",
+            "description": "GOOD KID M.A.A.D CITY CD",
+            "price": 650,
+            "class": "cd"
+        },
+        {
+            "id": 8,
+            "img": "postmalone.jpg",
+            "name": "Post Malone",
+            "description": "HOLLYWOOD BLEEDING CD",
+            "price": 450,
+            "class": "cd"
+        }
+    ]
+}
+
