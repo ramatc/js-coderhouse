@@ -4,34 +4,41 @@ $(document).ready(function() {
         localStorage.setItem(key, value);
     }
 
-    //Declaracion de array con el listado de productos 
-    const products = [
-        { id: 1, img: "astroworld.jpg", name: "Travis Scott", description: "ASTROWORLD Vinyl Record", price: 2500, class: "vinyl" },
-        { id: 2, img: "igor.jpg", name: "Tyler, The Creator", description: "THE IGOR LP Vinyl Record", price: 1300, class: "vinyl" },
-        { id: 3, img: "take-care.jpg", name: "Drake", description: "TAKE CARE Vinyl Record", price: 1100, class: "vinyl" },
-        { id: 4, img: "slim-shady.jpg", name: "Eminem", description: "SLIM SHADY LP Vinyl Record", price: 1700, class: "vinyl" },
-        { id: 5, img: "xxxtentacion.jpg", name: "XXXTentacion", description: "BAD VIBES FOREVER CD", price: 850, class: "cd" },
-        { id: 6, img: "juice.jpg", name: "Juice WRLD", description: "DEATH RACE FOR LOVE CD", price: 500, class: "cd" },
-        { id: 7, img: "kendrick.jpg", name: "Kendrick Lamar", description: "GOOD KID M.A.A.D CITY CD", price: 650, class: "cd" },
-        { id: 8, img: "postmalone.jpg", name: "Post Malone", description: "HOLLYWOOD BLEEDING CD", price: 450, class: "cd" }
-    ];
-
-    //A traves del metodo for...of, añadimos todos los productos del array mediante plantillas
-    for (const product of products) {
-        const listCards = `<article>
-                                <img src="img/${product.img}" alt="${product.description}">
-                                <h3 class="title-product">${product.name}</h3>
-                                <p class="description-product">${product.description}</p>
-                                <p class="price-product">$${product.price}</p>
-                                <button class="cart-button" id=${product.id}>Agregar al carrito <i class="fas fa-shopping-cart"></i></button>
-                           </article>`;
-
-        if (product.class === "vinyl") {
-            $(".main-article-top").append(listCards);
-        } else {
-            $(".main-article-bottom").append(listCards);
+    //Variable que contiene todos los productos, en un archivo json
+    const URLJSON = "data/products.json";
+    
+    //Metodo getJSON de AJAX para agregar los productos del archivo json estático
+    $.getJSON(URLJSON, function(response, state){
+        if(state === "success"){
+            let products = response.products;
+            setLocal("Productos", JSON.stringify(products));
+            //A traves del metodo for...of, añadimos todos los productos del array mediante plantillas
+            for (const product of products) {
+                const listCards = `<article>
+                                        <img src="img/${product.img}" alt="${product.description}">
+                                        <h3 class="title-product">${product.name}</h3>
+                                        <p class="description-product">${product.description}</p>
+                                        <p class="price-product">$${product.price}</p>
+                                        <button class="cart-button" id=${product.id}>Agregar al carrito <i class="fas fa-shopping-cart"></i></button>
+                                   </article>`;
+        
+                if (product.class === "vinyl") {
+                    $(".main-article-top").append(listCards);
+                } else {
+                    $(".main-article-bottom").append(listCards);
+                }
+            }
+            //Capturo los botones de "agregar al carrito" de cada producto.
+            let boton = $(".cart-button");
+            for (let i = 0; i < boton.length; i++) {
+                boton[i].addEventListener("click", function() {
+                    addCart(boton[i].id);
+                })
+            }
         }
-    }
+    })  
+
+    let productsJSON = JSON.parse(localStorage.getItem("Productos"));
 
     //Declaracion de array vacio para agregar los productos que se sumen al carrito
     let carrito = [];
@@ -58,14 +65,6 @@ $(document).ready(function() {
 
     countCart();
 
-    //Capturo los botones de "agregar al carrito" de cada producto.
-    let boton = $(".cart-button");
-    for (let i = 0; i < boton.length; i++) {
-        boton[i].addEventListener("click", function() {
-            addCart(boton[i].id);
-        })
-    }
-
     //Funcion para agregar items al carrito, donde los filtra por id, y los pushea al array "carrito"
     function addCart(id) {
         const validar = carrito.find(producto => producto.id == id);
@@ -88,7 +87,7 @@ $(document).ready(function() {
             }).showToast();
 
         } else {
-            let items = products.filter(product => product.id == id);
+            let items = productsJSON.filter(product => product.id == id);
             let item = items[0];
             Object.defineProperty(item, 'amount', { value: 1, writable: true });
             carrito.push( { ...item, amount: 1});
@@ -197,14 +196,14 @@ $(document).ready(function() {
                 timer: 2000
             })
             setTimeout(function() { location.reload(); }, 2000);
-            localStorage.clear();
+            localStorage.removeItem("Carrito");
             countCart();
         }
     })
 
     //Al hacer click en el boton, vacia el localStorage, y recarga la página
     $("#btnEmpty").on("click", function() {
-        localStorage.clear();
+        localStorage.removeItem("Carrito");
         location.reload();
         countCart();
     })
