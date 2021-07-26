@@ -195,8 +195,12 @@ $(document).ready(function() {
                 showConfirmButton: false,
                 timer: 2000
             })
-            setTimeout(function() { location.reload(); }, 2000);
             localStorage.removeItem("Carrito");
+            carrito = [];
+            setTimeout(function() { 
+                $("#itemCart").html(""); 
+                calculatePrice();
+            }, 2000);
             countCart();
         }
     })
@@ -204,7 +208,9 @@ $(document).ready(function() {
     //Al hacer click en el boton, vacia el localStorage, y recarga la página
     $("#btnEmpty").on("click", function() {
         localStorage.removeItem("Carrito");
-        location.reload();
+        carrito = [];
+        $("#itemCart").html("");
         countCart();
+        calculatePrice();
     })
 });

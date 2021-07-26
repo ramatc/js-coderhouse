@@ -19,6 +19,8 @@ li, a, button{
     color: #ffffff;
     text-decoration: none;
 }
+
+/*HEADER*/
 header{
     display: flex;
     justify-content: space-between;
@@ -73,11 +75,24 @@ ul.nav-links{
 .header-button:hover{
     background-color: rgba(101,32,139,0.8);
 }
+.cartNumber{
+    font-size: 14px;
+    background: #000000;
+    line-height: 1;
+    padding: 0.3em 0.5em 5px;
+    border-radius: 99em;
+    position: absolute;
+    top: 30px;
+}
+
+/*CAROUSEL*/
 .banner{
     width: 100%;
     border-radius: 15px;
     margin-top: 30px;
 }
+
+/*PRODUCTS*/
 main{
     width: 80%;
     margin: 0 auto;
@@ -128,6 +143,20 @@ article img{
 .cart-button:hover{
     background-color: rgba(19, 11, 24, 0.8);
 }
+.alertBuy{
+    background: linear-gradient(to right, #00b09b, #96c93d);
+    white-space: initial;
+    width: 245px;
+    border-radius: 5px;
+ }
+ .alertCart{
+     background: linear-gradient(to right, #73a5ff, #5477f5);
+     white-space: initial;
+     width: 245px;
+     border-radius: 5px;
+ }
+
+/*CONTACT*/
 .section-contact{
     background-color: #fff;
     border-radius: 17px;
@@ -198,6 +227,71 @@ article img{
     padding: 7px 3px 10px;
     font-size: 17px;
 }
+
+/*FOOTER*/
+footer{
+    background-color: #282828;
+    height: auto;
+    width: 100vw;
+    padding-top: 20px;
+    margin-top: 40px;
+    color: #fff;
+}
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.footer-content h3{
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+}
+.footer-content p{
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 16px;
+}
+.icons{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 1.5rem 0;
+}
+.icons li{
+    margin: 0 10px;
+}
+.icons a{
+    text-decoration: none;
+    color: #fff;
+}
+.icons a i{
+    font-size: 23px;
+    transition: color .4s ease;
+}
+.icons a:hover{
+    color: rgba(101,32,139,1);
+}
+.footer-bottom{
+    background-color: #000;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer-bottom p{
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+.footer-bottom span{
+    opacity: .4;
+    font-weight: 200;
+}
 #btnTop{
     display: none; 
     position: fixed; 
@@ -216,27 +310,8 @@ article img{
 #btnTop:hover{
     background-color: #65208b;
 }
-.alertBuy{
-   background: linear-gradient(to right, #00b09b, #96c93d);
-   white-space: initial;
-   width: 245px;
-   border-radius: 5px;
-}
-.alertCart{
-    background: linear-gradient(to right, #73a5ff, #5477f5);
-    white-space: initial;
-    width: 245px;
-    border-radius: 5px;
-}
-.cartNumber{
-    font-size: 14px;
-    background: #000000;
-    line-height: 1;
-    padding: 0.3em 0.5em 5px;
-    border-radius: 99em;
-    position: absolute;
-    top: 30px;
-}
+
+/*CART*/
 .sidenav {
     height: 100%;
     width: 0;
@@ -345,67 +420,4 @@ article img{
     border: none;
     background-color: #000000;
     cursor: pointer;   
-}
-footer{
-    background-color: #282828;
-    height: auto;
-    width: 100vw;
-    padding-top: 20px;
-    margin-top: 40px;
-    color: #fff;
-}
-.footer-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-}
-.footer-content h3{
-    font-size: 1.8rem;
-    font-weight: 400;
-    text-transform: capitalize;
-    line-height: 3rem;
-}
-.footer-content p{
-    max-width: 500px;
-    margin: 10px auto;
-    line-height: 28px;
-    font-size: 16px;
-}
-.icons{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem 0 1.5rem 0;
-}
-.icons li{
-    margin: 0 10px;
-}
-.icons a{
-    text-decoration: none;
-    color: #fff;
-}
-.icons a i{
-    font-size: 23px;
-    transition: color .4s ease;
-}
-.icons a:hover{
-    color: rgba(101,32,139,1);
-}
-.footer-bottom{
-    background-color: #000;
-    width: 100vw;
-    padding: 20px 0;
-    text-align: center;
-}
-.footer-bottom p{
-    font-size: 14px;
-    word-spacing: 2px;
-    text-transform: capitalize;
-}
-.footer-bottom span{
-    opacity: .4;
-    font-weight: 200;
 }

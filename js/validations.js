@@ -77,7 +77,7 @@ $(document).ready(function(){
     })
 
     buttonSubmit.addEventListener('click', function(e) {
-        e.preventDefault()
+        e.preventDefault();
         let errores = {};
 
         if (name.value == "") {
@@ -116,13 +116,40 @@ $(document).ready(function(){
             erMsg.innerText = (errores.msg) ? errores.msg : ' ';
 
         } else {
-            setTimeout(function() { form.submit(); }, 2000);
-            Swal.fire({
-                icon: 'success',
-                title: '¡Su mensaje se ha enviado exitosamente!',
-                text: 'Lo contactaremos a la brevedad',
-                showConfirmButton: false,
-                timer: 2000
+            const APIURL = "https://jsonplaceholder.typicode.com/posts";
+
+            const infoPost = {name: name.value, email: email.value, tel: tel.value, msg: msg.value};
+
+            $.ajax({
+                method: "POST",
+                url: APIURL,
+                data: infoPost,
+                success: function(response){
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Su mensaje se ha enviado exitosamente!',
+                        text: 'Gracias ' + response.name + ', lo contactaremos a la brevedad',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+
+                    setTimeout(function() {  
+
+                    name.classList.remove('is-valid');
+                    name.value = "";
+
+                    email.classList.remove('is-valid');
+                    email.value = "";
+
+                    tel.classList.remove('is-valid');
+                    tel.value = "";
+
+                    msg.classList.remove('is-valid');
+                    msg.value = "";
+
+                    }, 2500);
+                }
             })
         }
     })
