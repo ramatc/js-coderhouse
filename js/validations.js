@@ -13,8 +13,9 @@ $(document).ready(function(){
     let erTel = document.querySelector(".erTel")
     let erMsg = document.querySelector(".erMsg")
 
-    //Formato para validar emails
-    let mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    //Formato para validar caracteres
+    let mailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let nameFormat = /^[a-zA-Z\s]*$/;
 
     name.addEventListener('blur', function() {
         if (name.value == "") {
@@ -25,6 +26,10 @@ $(document).ready(function(){
             name.classList.add('is-invalid');
             name.classList.remove('is-valid');
             erName.innerText = "Debes usar 2 caracteres o más"
+        }else if(!name.value.match(nameFormat)){
+            name.classList.add('is-invalid');
+            name.classList.remove('is-valid');
+            erName.innerText = "Debes ingresar un nombre valido"
         } else {
             name.classList.remove('is-invalid');
             name.classList.add('is-valid');
@@ -85,6 +90,9 @@ $(document).ready(function(){
             name.classList.add('is-invalid');
         } else if (name.value.length < 2) {
             errores.name = "Debes usar 2 caracteres o más"
+            name.classList.add('is-invalid');
+        }else if(!name.value.match(nameFormat)){
+            errores.name = "Debes ingresar un nombre valido"
             name.classList.add('is-invalid');
         };
 

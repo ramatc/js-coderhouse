@@ -182,6 +182,8 @@ $(document).ready(function() {
         countPrice[1].innerText = `$${total}`;
     }
 
+    calculatePrice();
+
     /*Al hacer click en el boton, va a mandar una alerta si el carrito esta vacio, 
     y de no ser asi, va a mandar otra alerta que notifique la compra, vaciando ademas el localStorage*/
     $("#btnBuy").on("click", function(e) {
