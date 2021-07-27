@@ -130,7 +130,8 @@ $(document).ready(function() {
                                         <span id=itemAmount${item.id}>${item.amount}</span>
                                         <span>Unidad(es)</span>
                                         <button class="addButton" id=addButton${item.id}>+</button>
-                                    </div>
+                                        <button class="btnDelete" id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
                                 </div>
                             </div>`;
                             
@@ -191,9 +192,11 @@ $(document).ready(function() {
             e.preventDefault();
             Swal.fire('Su carrito esta vacio')
         } else {
+            let random = Math.random();
             Swal.fire({
                 icon: 'success',
                 title: '¡Su compra ha sido exitosa!',
+                text: "ID de compra: " + random.toString().slice(2),
                 showConfirmButton: false,
                 timer: 2000
             })

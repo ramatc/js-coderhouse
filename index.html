@@ -26,10 +26,22 @@
                 <li><a href="#footer">Nosotros</a></li>
             </ul>
         </nav>
-        <button class="header-button" id="openMenu">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cartNumber">0</span>
-        </button>
+        <div>
+            <div class="dropdown">
+                <i class="fas fa-bars dropbtn"></i>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#">Inicio</a>
+                    <a href="#products">Productos</a>
+                    <a href="#contact">Contacto</a>
+                    <a href="#footer">Nosotros</a>
+                </div>
+            </div>
+            <button class="header-button" id="openMenu">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cartNumber">0</span>
+            </button>
+        </div>
+
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" id="closeMenu">&times;</a>
             <p class="titleCart">Tu carrito de compras:</p>

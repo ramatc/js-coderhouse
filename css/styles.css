@@ -44,7 +44,7 @@ header{
     cursor: pointer;
     font-weight: lighter;
     transition: all 0.3s ease 0s;
-    font-size: 29px;
+    font-size: 24px;
 }
 .nav-title:hover,
 .nav-links li a:hover{
@@ -55,6 +55,7 @@ ul.nav-links{
 }
 .nav-links{
     list-style: none;
+    display: none;
 }
 .nav-links li{
     display: inline-block;
@@ -64,7 +65,7 @@ ul.nav-links{
     transition: all 0.3s ease 0s;
 }
 .header-button{
-    padding: 10px 20px;
+    padding: 7px 14px;
     background-color: rgba(101,32,139,1);
     border-radius: 50px;
     cursor: pointer;
@@ -84,6 +85,37 @@ ul.nav-links{
     position: absolute;
     top: 30px;
 }
+
+
+/*DROPDOWN*/
+.dropbtn {
+    background-color: #282828;
+    color: white;
+    padding-right: 7px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {background-color: #ddd}
+.show {display:block;}
 
 /*CAROUSEL*/
 .banner{
@@ -418,6 +450,44 @@ footer{
 }
 .btnDelete{
     border: none;
-    background-color: #000000;
+    background-color: #111111;
     cursor: pointer;   
+}
+.btnDelete i{
+    margin-left: 135px; 
+}
+
+/* Media queries 576px, 768px, 992px y 1200px */
+
+@media(min-width: 576px) {
+    
+}
+
+@media(min-width: 768px) {
+   
+}
+
+@media(min-width: 992px) {
+    .nav-links{
+        display: block;
+    }  
+    .dropdown{
+        display: none;
+    }
+}
+
+@media(min-width: 1200px) {
+    .nav-title{
+        font-size: 29px;
+    }
+    .header-button{
+        padding: 10px 20px;
+        background-color: rgba(101,32,139,1);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+        border: none;
+        font-size: 20px;
+    }
+   
 }
