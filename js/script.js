@@ -3,6 +3,10 @@ $(document).ready(function() {
     function setLocal(key, value) {
         localStorage.setItem(key, value);
     }
+    //Funcion para actualizar los items en el local storage 
+    function setLocalCart(carrito){
+        setLocal("Carrito", JSON.stringify(carrito));
+    }
 
     //Variable que contiene todos los productos, en un archivo json
     const URLJSON = "data/products.json";
@@ -91,7 +95,7 @@ $(document).ready(function() {
             let item = items[0];
             Object.defineProperty(item, 'amount', { value: 1, writable: true });
             carrito.push( { ...item, amount: 1});
-            setLocal("Carrito", JSON.stringify(carrito));
+            setLocalCart(carrito);
 
             Toastify({
                 text: "El producto fue agregado a tu carrito.",
@@ -159,6 +163,7 @@ $(document).ready(function() {
             objectCart.amount++;
             $(`#itemAmount${item.id}`).text(objectCart.amount);
             calculatePrice()
+            setLocalCart(carrito);
         })
     }
 
@@ -168,10 +173,12 @@ $(document).ready(function() {
             let objectCart = carrito.find(({ id }) => id == item.id);
             if (objectCart.amount == 1) {
                 objectCart.amount;
-                calculatePrice()
+                calculatePrice();
+                setLocalCart(carrito);
             } else {
                 objectCart.amount--;
-                calculatePrice()
+                calculatePrice();
+                setLocalCart(carrito);
             }
             $(`#itemAmount${item.id}`).text(objectCart.amount);
         })
