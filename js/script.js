@@ -11,6 +11,9 @@ $(document).ready(function() {
     //Variable que contiene todos los productos, en un archivo json
     const URLJSON = "data/products.json";
     
+    //Inicializo la variable global vacia, para actualizarla luego de la llamada AJAX
+    let productsJSON;
+
     //Metodo getJSON de AJAX para agregar los productos del archivo json estático
     $.getJSON(URLJSON, function(response, state){
         if(state === "success"){
@@ -39,10 +42,10 @@ $(document).ready(function() {
                     addCart(boton[i].id);
                 })
             }
+            productsJSON = JSON.parse(localStorage.getItem("Productos"));
         }
     })  
 
-    let productsJSON = JSON.parse(localStorage.getItem("Productos"));
 
     //Declaracion de array vacio para agregar los productos que se sumen al carrito
     let carrito = [];
@@ -156,14 +159,31 @@ $(document).ready(function() {
         })
     }
 
+    function deleteItem(id){
+        let filtered = carrito.filter(item => item.id != id);
+        carrito = filtered;
+        if(carrito.length == 0){
+            localStorage.removeItem("Carrito");
+        }else{
+            localStorag.setItem("Carrito", JSON.stringify(carrito));
+        }
+        countCart();
+    }
+
     //Funcion para sumar un producto en el carrito
     function addButton(item) {
         $(`#addButton${item.id}`).on("click", function() {
             let objectCart = carrito.find(({ id }) => id == item.id);
-            objectCart.amount++;
+            if (objectCart.amount == 99) {
+                objectCart.amount;
+                calculatePrice();
+                setLocalCart(carrito);
+            } else {
+                objectCart.amount++;
+                calculatePrice();
+                setLocalCart(carrito);
+            }
             $(`#itemAmount${item.id}`).text(objectCart.amount);
-            calculatePrice()
-            setLocalCart(carrito);
         })
     }
 
