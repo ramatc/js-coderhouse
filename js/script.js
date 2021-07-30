@@ -165,7 +165,7 @@ $(document).ready(function() {
         if(carrito.length == 0){
             localStorage.removeItem("Carrito");
         }else{
-            localStorag.setItem("Carrito", JSON.stringify(carrito));
+            localStorage.setItem("Carrito", JSON.stringify(carrito));
         }
         countCart();
     }

@@ -139,7 +139,7 @@ $(document).ready(function(){
                         title: '¡Su mensaje se ha enviado exitosamente!',
                         text: 'Gracias ' + response.name + ', lo contactaremos a la brevedad',
                         showConfirmButton: false,
-                        timer: 2500
+                        timer: 2000
                     })
 
                     setTimeout(function() {  
@@ -156,7 +156,7 @@ $(document).ready(function(){
                     msg.classList.remove('is-valid');
                     msg.value = "";
 
-                    }, 2500);
+                    }, 2000);
                 }
             })
         }
