@@ -284,7 +284,7 @@ footer{
     text-transform: capitalize;
 }
 .footer-content p{
-    max-width: 500px;
+    max-width: 650px;
     margin: 10px auto;
     line-height: 24px;
     font-size: 15.5px;
@@ -439,9 +439,9 @@ footer{
     border: none;
     background-color: #111111;
     cursor: pointer;   
-}
-.btnDelete i{
-    margin-left: 125px; 
+    width: 0px;
+    position: relative;
+    left: 25px;
 }
 
 /* Media queries 576px, 768px, 992px y 1200px */
@@ -456,6 +456,9 @@ footer{
         flex-wrap: wrap;
         justify-content: space-between;
         margin-top: 40px;
+    }
+    .btnDelete{
+        left: 55px;
     }
 }
 
@@ -506,6 +509,9 @@ footer{
     }
     .border-info{
         padding: 0px
+    }
+    .btnDelete{
+        left: 135px;
     }
 }
 

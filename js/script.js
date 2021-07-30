@@ -138,7 +138,7 @@ $(document).ready(function() {
                                         <span>Unidad(es)</span>
                                         <button class="addButton" id=addButton${item.id}>+</button>
                                         <button class="btnDelete" id="${item.id}"><i class="fas fa-trash-alt"></i></button>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>`;
                             
@@ -168,6 +168,7 @@ $(document).ready(function() {
             localStorage.setItem("Carrito", JSON.stringify(carrito));
         }
         countCart();
+        calculatePrice();
     }
 
     //Funcion para sumar un producto en el carrito
