@@ -41,13 +41,13 @@ $(document).ready(function() {
 
     //Cuando el usuario hace clic en el botón, alterna entre ocultar y mostrar el contenido desplegable
     $(".dropbtn").on("click", function(){
-        document.getElementById("myDropdown").classList.toggle("show");
+        $("#myDropdown").toggleClass("show")
     })
   
     // Cierra el menú desplegable si el usuario hace clic fuera de él 
     window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var dropdowns = $(".dropdown-content")
         var i;
         for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
