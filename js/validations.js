@@ -72,9 +72,14 @@ $(document).ready(function(){
         } else if (tel.value.length < 8) {
             tel.classList.add('is-invalid');
             tel.classList.remove('is-valid');
-            erTel.innerText = "Debes ingresar un número de telefono valido, con al menos 8 digitos";
+            erTel.innerText = "Debes ingresar un número de telefono valido, con 8 o más digitos";
+        //Si el campo es mayor a catorce caracteres, no va a dejar enviarlo
+        } else if(tel.value.length > 14){
+            tel.classList.add('is-invalid');
+            tel.classList.remove('is-valid');
+            erTel.innerText = "Debes ingresar un número de telefono valido, con menos de 14 digitos";
         //Si no hay ningun error, se valida el campo
-        } else {
+        } else{
             tel.classList.remove('is-invalid');
             tel.classList.add('is-valid');
             erTel.innerText = "";
@@ -128,7 +133,10 @@ $(document).ready(function(){
             errores.tel = "Tienes que ingresar un número de telefono";
             tel.classList.add('is-invalid');
         } else if (tel.value.length < 8) {
-            errores.tel = "Debes ingresar un número de telefono valido, con al menos 8 digitos";
+            errores.tel = "Debes ingresar un número de telefono valido, con 8 o más digitos";
+            tel.classList.add('is-invalid');
+        } else if(tel.value.length > 14){
+            errores.tel = "Debes ingresar un número de telefono valido, con menos de 14 digitos";
             tel.classList.add('is-invalid');
         };
 
