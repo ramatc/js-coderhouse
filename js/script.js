@@ -128,7 +128,7 @@ $(document).ready(function() {
     function renderCart(item) {
         const listCards = `<div class="articleCart"> 
                                 <img src="img/${item.img}" alt="${item.description}">
-                                <div class="textCart">
+                                <div id=cart${item.id} class="textCart">
                                     <p>${item.name}</p>
                                     <p>${item.description}</p>
                                     <p>$${item.price}</p>
@@ -144,6 +144,12 @@ $(document).ready(function() {
                             
         $("#itemCart").append(listCards);
 
+        $(`#${item.id}`).click(function(){
+            $(`#cart${item.id}`).parent().remove();
+            setLocalCart(carrito);
+            deleteItem(`${item.id}`);
+        });
+
         addButton(item);
         subtractButton(item);
 
@@ -151,14 +157,7 @@ $(document).ready(function() {
 
     }
 
-    //Capturo los botones para eliminar un item del carrito
-    let buttonDelete = $(".btnDelete")
-    for (let i = 0; i < buttonDelete.length; i++) {
-        buttonDelete[i].addEventListener("click", function() {
-            deleteItem(buttonDelete[i].id);
-        })
-    }
-
+    //Funcion para eliminar un producto del carrito
     function deleteItem(id){
         let filtered = carrito.filter(item => item.id != id);
         carrito = filtered;
