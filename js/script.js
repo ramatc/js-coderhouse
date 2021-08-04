@@ -14,6 +14,9 @@ $(document).ready(function() {
     //Inicializo la variable global vacia, para actualizarla luego de la llamada AJAX
     let productsJSON;
 
+    //Inicializo la variable global vacia, para actualizarla luego de agregar productos al carrito.
+    let total;
+
     //Metodo getJSON de AJAX para agregar los productos del archivo json estático
     $.getJSON(URLJSON, function(response, state){
         if(state === "success"){
@@ -209,9 +212,10 @@ $(document).ready(function() {
         })
     }
 
+    //Funcion para calcular el precio total del carrito, donde multiplico la cantidad de productos, por su precio individual
     function calculatePrice() {
         let countPrice = $(".totalPrice");
-        let total = carrito.reduce( (acc, prod) => acc + (prod.price * prod.amount), 0)
+        total = carrito.reduce( (acc, prod) => acc + (prod.price * prod.amount), 0)
         countPrice[1].innerText = `$${total}`;
     }
 
@@ -228,16 +232,17 @@ $(document).ready(function() {
             Swal.fire({
                 icon: 'success',
                 title: '¡Su compra ha sido exitosa!',
-                text: "ID de compra: " + random.toString().slice(2),
+                text: "Precio total: $" + total,
+                footer:"ID de compra: " + random.toString().slice(2),
                 showConfirmButton: false,
-                timer: 2000
+                timer: 2300
             })
             localStorage.removeItem("Carrito");
             carrito = [];
             setTimeout(function() { 
                 $("#itemCart").html(""); 
                 calculatePrice();
-            }, 2000);
+            }, 2300);
             countCart();
         }
     })
