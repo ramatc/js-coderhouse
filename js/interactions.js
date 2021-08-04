@@ -2,7 +2,7 @@ $(document).ready(function() {
     //Al abrir el menu, su width pasa a 550px, y el fondo del main se blurea
     $("#openMenu").on("click", function(){
         if(window.matchMedia("(max-width: 576px)").matches){
-            $("#mySidenav").css("width", "360px");
+            $("#mySidenav").css("width", "100%");
         }else if(window.matchMedia("(max-width: 768px)").matches){
             $("#mySidenav").css("width", "420");
         } else{
