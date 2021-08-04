@@ -74,8 +74,10 @@ $(document).ready(function() {
 
     //Funcion para agregar items al carrito, donde los filtra por id, y los pushea al array "carrito"
     function addCart(id) {
+        //Si el producto ya esta en el carrito, no se vuelve a agregar
         const validar = carrito.find(producto => producto.id == id);
         if (validar) {
+            //Alerta de Toastify.js, la cual indica que el producto ya se encuentra en el carrito
             Toastify({
                 text: "El producto ya esta en tu carrito.",
                 duration: 2500,
@@ -94,12 +96,14 @@ $(document).ready(function() {
             }).showToast();
 
         } else {
+            //Filtra los productos segun el id del producto, y el id que llega, para pushearlo al array carrito
             let items = productsJSON.filter(product => product.id == id);
             let item = items[0];
             Object.defineProperty(item, 'amount', { value: 1, writable: true });
             carrito.push( { ...item, amount: 1});
             setLocalCart(carrito);
 
+            //Alerta de Toastify.js, la cual indica que el producto se agrego al carrito
             Toastify({
                 text: "El producto fue agregado a tu carrito.",
                 duration: 2500,
@@ -144,6 +148,7 @@ $(document).ready(function() {
                             
         $("#itemCart").append(listCards);
 
+        //Al clickear el boton de eliminar un producto, va a pasarle su id a la funcion deleteItem, y va a removerlo de la vista
         $(`#${item.id}`).click(function(){
             $(`#cart${item.id}`).parent().remove();
             setLocalCart(carrito);
@@ -170,7 +175,7 @@ $(document).ready(function() {
         calculatePrice();
     }
 
-    //Funcion para sumar un producto en el carrito
+    //Funcion para sumar un producto en el carrito, hasta un maximo de 99 productos
     function addButton(item) {
         $(`#addButton${item.id}`).on("click", function() {
             let objectCart = carrito.find(({ id }) => id == item.id);
@@ -187,7 +192,7 @@ $(document).ready(function() {
         })
     }
 
-    //Funcion para restar un producto en el carrito
+    //Funcion para restar un producto en el carrito, hasta un minimo de 1 producto
     function subtractButton(item) {
         $(`#subtractButton${item.id}`).on("click", function() {
             let objectCart = carrito.find(({ id }) => id == item.id);

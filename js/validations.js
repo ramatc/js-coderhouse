@@ -97,9 +97,12 @@ $(document).ready(function(){
     });
 
     buttonSubmit.addEventListener('click', function(e) {
+        //Previene que se envie el formulario
         e.preventDefault();
+        //Array para acumular los errores
         let errores = {};
 
+        //Validaciones para el campo name, como que no este vacio o que sea mayor a 2 caracteres
         if (name.value == "") {
             errores.name = "Tienes que ingresar un nombre";
             name.classList.add('is-invalid');
@@ -111,6 +114,7 @@ $(document).ready(function(){
             name.classList.add('is-invalid');
         };
 
+        //Validaciones para el campo email, como que no este vacio o que tenga formato de mail
         if (email.value == "") {
             errores.email = "Tienes que ingresar un correo electronico";
             email.classList.add('is-invalid');
@@ -119,6 +123,7 @@ $(document).ready(function(){
             email.classList.add('is-invalid');
         };
 
+        //Validaciones para el campo tel, como que no este vacio o que tenga al menos 8 digitos
         if (tel.value == "") {
             errores.tel = "Tienes que ingresar un número de telefono";
             tel.classList.add('is-invalid');
@@ -127,11 +132,13 @@ $(document).ready(function(){
             tel.classList.add('is-invalid');
         };
 
+        //Validaciones para el campo msg, para que el usuario ingrese algun mensaje
         if (msg.value == "") {
             errores.msg = "Tienes que ingresar un mensaje";
             msg.classList.add('is-invalid');
         };
 
+        //Si hay un error o mas, se agrega el mensaje de error debajo del input correspondiente
         if (Object.keys(errores).length >= 1) {
             erName.innerText = (errores.name) ? errores.name : ' ';
             erEmail.innerText = (errores.email) ? errores.email : ' ';
@@ -139,10 +146,13 @@ $(document).ready(function(){
             erMsg.innerText = (errores.msg) ? errores.msg : ' ';
 
         } else {
+            //URL de la API jsonplaceholder
             const APIURL = "https://jsonplaceholder.typicode.com/posts";
 
+            //Informacion para enviar por POST a la API 
             const infoPost = {name: name.value, email: email.value, tel: tel.value, msg: msg.value};
 
+            //Llamado AJAX, donde envio la informacion que ingresa el usuario, y muestra una alerta si el llamado fue exitoso
             $.ajax({
                 method: "POST",
                 url: APIURL,
@@ -157,6 +167,7 @@ $(document).ready(function(){
                         timer: 2000
                     })
 
+                    //Limpia el value de los inputs, y le borra las clases
                     setTimeout(function() {  
 
                     name.classList.remove('is-valid');
